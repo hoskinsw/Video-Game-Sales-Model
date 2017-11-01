@@ -28,12 +28,15 @@ X_test = sc.transform(X_test)
 import keras 
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers import Dropout
 
 classifier = Sequential()
 
 classifier.add(Dense(activation = 'relu', input_dim = 291, units=1000, kernel_initializer="uniform"))
 classifier.add(Dense(activation = 'relu', units=1000, kernel_initializer="uniform"))
+classifier.add(Dropout(.2))
 classifier.add(Dense(activation = 'sigmoid', units=1000, kernel_initializer="uniform"))
+classifier.add(Dropout(.2))
 classifier.add(Dense(activation = 'sigmoid', units=1, kernel_initializer="uniform")) 
 #metric vs loss: loss function is used in training, metric isn't
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics=['accuracy'])
