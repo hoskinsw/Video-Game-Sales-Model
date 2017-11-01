@@ -11,7 +11,7 @@ dataset = dataset.dropna()
 y = dataset.iloc[:, 9].values
 remCols = [0,5,6,7,8,9,12,13,14,15]
 dataset.drop(dataset.columns[remCols],axis=1,inplace=True)
-#dataset = pd.get_dummies(dataset, drop_first = True)
+dataset = pd.get_dummies(dataset, drop_first = True)
 
 X = dataset.iloc[:, :].values
 
@@ -47,7 +47,7 @@ from keras.layers import Dense
 
 classifier = Sequential()
 
-classifier.add(Dense(activation = 'relu', input_dim = 6, units=1000, kernel_initializer="uniform"))
+classifier.add(Dense(activation = 'relu', input_dim = 291, units=1000, kernel_initializer="uniform"))
 classifier.add(Dense(activation = 'relu', units=1000, kernel_initializer="uniform"))
 classifier.add(Dense(activation = 'sigmoid', units=1000, kernel_initializer="uniform"))
 classifier.add(Dense(activation = 'sigmoid', units=1, kernel_initializer="uniform")) 
