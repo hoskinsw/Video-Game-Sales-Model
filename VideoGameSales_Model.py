@@ -17,22 +17,6 @@ X = dataset.iloc[:, :].values
 
 y = (y > 1)
 
-'''
-#Uncomment to handle categorical data
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-labelencoder_X = LabelEncoder()
-X[:, 0] = labelencoder_X.fit_transform(X[:, 0])
-X[:, 2] = labelencoder_X.fit_transform(X[:, 2])
-X[:, 3] = labelencoder_X.fit_transform(X[:, 3])
-#X[:, 6] = labelencoder_X.fit_transform(X[:, 6])
-
-onehotencoder = OneHotEncoder(categorical_features = [0, 2, 3, 6])
-X = onehotencoder.fit_transform(X).toarray()
-
-#Remove one of the rows the avoid the Dummy Variable trap
-X = X[:, 1:]
-'''
-
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
@@ -58,12 +42,6 @@ classifier.fit(X_train, y_train, batch_size = 10, epochs = 10)
 
 y_pred = classifier.predict(X_test)
 y_pred = (y_pred > 0.5)
-
-#Predicting a single new observation
-'''
-new_prediction = classifier.predict(sc_X.transform(np.array([[0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])))
-new_prediction = (new_prediction > .5)
-'''
 
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
